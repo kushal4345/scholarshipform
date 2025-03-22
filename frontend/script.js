@@ -35,13 +35,14 @@ async function submitForm(event) {
     const formData = {
         fullName: form.fullName.value.trim(),
         email: form.email.value.trim(),
+        class: form.class.value.trim(), // Added class field
         phone: form.phone.value.trim(),
         referralCode: referralSelect.value === 'yes' ? referralCodeInput?.value.trim() : generatedReferralCode.textContent.trim(),
         essay: form.essay.value.trim(),
     };
 
     try {
-        const response = await fetch('https://scholarshipform.onrender.com/api/submit', {  // ✅ Fixed API endpoint
+        const response = await fetch('https://scholarshipform.onrender.com/api/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,6 +56,12 @@ async function submitForm(event) {
 
         const result = await response.json();
         alert(result.message || 'Form submitted successfully!');
+
+        // Redirect to WhatsApp group link after successful submission
+        const whatsappGroupLink = 'https://whatsapp.com/channel/0029Va5ezbY4Crff6TBCef0y'; // Replace with your WhatsApp group link
+        window.location.href = whatsappGroupLink;
+
+        // Reset the form
         form.reset();
     } catch (error) {
         alert(error.message || 'An error occurred while submitting the form.');

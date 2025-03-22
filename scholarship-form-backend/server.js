@@ -9,7 +9,7 @@ const port = 5000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ origin: "https://scholarshipform-k1f6.vercel.app/" }));
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));

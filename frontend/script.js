@@ -41,7 +41,7 @@ async function submitForm(event) {
     };
 
     try {
-        const response = await fetch('/api/submit', {  // ✅ Fixed API endpoint
+        const response = await fetch('http://localhost:5000/api/submit', {  // ✅ Fixed API endpoint
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

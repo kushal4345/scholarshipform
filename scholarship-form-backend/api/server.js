@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 // API Endpoint to Handle Form Submission
-app.post('/submit', async (req, res) => {
+app.post('/api/submit', async (req, res) => {
     try {
         const { fullName, email, phone, referralCode, essay } = req.body;
 

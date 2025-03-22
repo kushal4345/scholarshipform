@@ -41,7 +41,7 @@ async function submitForm(event) {
     };
 
     try {
-        const response = await fetch('https://scholarshipform.onrender.com', {  // ✅ Fixed API endpoint
+        const response = await fetch('https://scholarshipform.onrender.com/api/submit', {  // ✅ Fixed API endpoint
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -33,15 +33,15 @@ async function submitForm(event) {
     const generatedReferralCode = document.getElementById('generatedReferralCode');
 
     const formData = {
-        fullName: form.fullName.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        referralCode: referralSelect.value === 'yes' ? referralCodeInput.value : generatedReferralCode.textContent,
-        essay: form.essay.value,
+        fullName: form.fullName.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        referralCode: referralSelect.value === 'yes' ? referralCodeInput?.value.trim() : generatedReferralCode.textContent.trim(),
+        essay: form.essay.value.trim(),
     };
 
     try {
-        const response = await fetch('https://scholarshipform-k1f6.vercel.app/', {
+        const response = await fetch('/api/submit', {  // ✅ Fixed API endpoint
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,10 +49,14 @@ async function submitForm(event) {
             body: JSON.stringify(formData),
         });
 
+        if (!response.ok) {
+            throw new Error('Failed to submit. Please try again.');
+        }
+
         const result = await response.json();
-        alert(result.message || result.error);
+        alert(result.message || 'Form submitted successfully!');
         form.reset();
     } catch (error) {
-        alert('An error occurred while submitting the form.');
+        alert(error.message || 'An error occurred while submitting the form.');
     }
 }
